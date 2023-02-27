@@ -200,7 +200,7 @@ class Decoder(nn.Module):
 
         self.layers = nn.ModuleList(
             [
-                DecoderBlock(embed_size, heads, forward_expansion, dropout, device)
+                DecoderBlock(embed_size, heads, forward_expansion, dropout)
                 for _ in range(num_layers)
             ]
         )
@@ -277,7 +277,6 @@ class Transformer(nn.Module):
         enc_src = self.encoder(src, src_mask)
         out = self.decoder(trg, enc_src, src_mask, trg_mask)
         return out
-
 
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
